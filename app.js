@@ -17,10 +17,7 @@ scores = [0,0];
 roundScore = 0;
 activePlayer = 0;
 
-//dom interaction
-//document.querySelector('#current-' + activePlayer).textContent = dice;
-
-//hide dice at start
+//hide dice at start scores = 0
 document.querySelector('.dice').style.display = 'none';
 
 document.getElementById('score-0').textContent = '0';
@@ -36,8 +33,16 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     console.log(dice);
     //display the result
     var diceDOM = document.querySelector('.dice');
-    diceDOM.style.diplay = 'block';
-    diceDOM.src = 'dice-' + dice + '.png';
-
+    diceDOM.style.display = 'block';
+    diceDOM.src = './dice-' + dice + '.png';
     //update round score only IF number is NOT 1
+    if (dice !== 1) {
+        //add score
+        roundScore += dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore ;
+    } else {
+        //next player using ternary operator
+        activePlayer === 0 ? activePlayer =1 : activePlayer = 0;
+        roundScore = 0; 
+    }
 });
