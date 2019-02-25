@@ -11,15 +11,33 @@ GAME RULES:
 
 
 //variables
-var scores, roundScore, activePlayer, dice;
+var scores, roundScore, activePlayer;
 
 scores = [0,0];
 roundScore = 0;
 activePlayer = 0;
 
-dice = Math.floor(Math.random() * 6) + 1;
-console.log(dice);
-
 //dom interaction
+//document.querySelector('#current-' + activePlayer).textContent = dice;
 
-document.querySelector('#score-0').textContent = dice;
+//hide dice at start
+document.querySelector('.dice').style.display = 'none';
+
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
+//event handlers
+//anonymous function -no name, can't be reused
+document.querySelector('.btn-roll').addEventListener('click', function(){
+    // Random number
+    dice = Math.floor(Math.random() * 6) + 1;
+    console.log(dice);
+    //display the result
+    var diceDOM = document.querySelector('.dice');
+    diceDOM.style.diplay = 'block';
+    diceDOM.src = 'dice-' + dice + '.png';
+
+    //update round score only IF number is NOT 1
+});
